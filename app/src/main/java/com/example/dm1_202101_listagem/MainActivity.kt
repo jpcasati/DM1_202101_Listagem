@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ArrayAdapter
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -17,6 +19,33 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         atualizarLista()
+
+        lstItem.setOnItemLongClickListener { parent, view, position, id ->
+
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("Apagar Item")
+            builder.setMessage("Deseja realmente apagar o item selecionado?")
+
+            builder.setPositiveButton("Sim") { dialog, which ->
+                itens.remove(itens.get(position))
+                atualizarLista()
+                Toast.makeText(this, "Item removido com sucesso!", Toast.LENGTH_LONG).show()
+            }
+
+            builder.setNegativeButton("Não") { dialog, which ->
+                Toast.makeText(this, "Item não removido!", Toast.LENGTH_LONG).show()
+            }
+
+            builder.show()
+
+            true
+        }
+
+        lstItem.setOnItemClickListener { parent, view, position, id ->
+
+
+
+        }
 
     }
 

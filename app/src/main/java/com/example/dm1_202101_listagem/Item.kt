@@ -7,4 +7,12 @@ data class Item(
     val nome: String,
     val preco: Float
 ) : Serializable {
+
+    override fun toString(): String {
+
+        val str = "ID: "+id+" - NOME: "+nome+" - PREÇO: R$"+preco
+        return str
+
+    }
+
 }
